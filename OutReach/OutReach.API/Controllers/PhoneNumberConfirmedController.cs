@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OutReach.API.Tools;
 
 namespace OutReach.API.Controllers
 {
@@ -10,10 +11,22 @@ namespace OutReach.API.Controllers
 	[ApiController]
 	public class PhoneNumberConfirmedController : Controller
     {
-		[HttpPost]
+		[HttpGet]
 		public IActionResult receiveMessage(string id, string to, string from, string keyword, string content)
 		{
-			return Ok(id);
+			var message = "";
+
+			switch(keyword.ToLower())
+			{
+				case "optin":
+					message = "Welcome - you have made the right choice!";
+					break;
+				case "optout":
+					message = "You have opted out! GOOD BYE!";
+					break;
+			}
+
+			return Ok(message);
 		}
 	}
 }
