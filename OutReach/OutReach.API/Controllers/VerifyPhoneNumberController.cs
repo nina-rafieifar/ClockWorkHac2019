@@ -7,19 +7,12 @@ using OutReach.API.Tools;
 namespace OutReach.API.Controllers {
 	[Route("api/[controller]")]
 	[ApiController]
-<<<<<<< HEAD
-	public class VerifyPhoneNumberController : ControllerBase
-    {
-
-=======
 	public class VerifyPhoneNumberController : ControllerBase {
->>>>>>> 0209af4560a5303c7a650117290e6f4ecccee2ff
 		// https://www.jerriepelser.com/blog/deserialize-different-json-object-same-class/
 		/// <summary>
 		/// Validates phone number. The details are passed via the body of the message.
 		/// </summary>
 		/// <returns></returns>
-<<<<<<< HEAD
 		[HttpPost]
 		public IActionResult validate()
 		{
@@ -28,25 +21,10 @@ namespace OutReach.API.Controllers {
 				var json = reader.ReadToEnd();
 				var contactDetails = JsonConvert.DeserializeObject<VerifyContactNumberModel>(json);
 
-				if(contactDetails != null)
+				if (contactDetails != null)
 				{
 					var clockWorkUtility = new ClockWorkUtiliity();
 					clockWorkUtility.sendMessage(contactDetails.PhoneNumber, "You have received this message to confirm your phone number. Please text OPTIN or OPTOUT?");
-=======
-		[HttpGet]
-		public IActionResult validate() {
-			using(var reader = new StreamReader(Request.Body)) {
-				var json = reader.ReadToEnd();
-				var contactDetails = (JObject) JsonConvert.DeserializeObject(json);
-
-				if (contactDetails != null) {
-					var details = contactDetails.GetEnumerator();
-
-					//do
-					//{
-					//	details.Current.Value;
-					//}
->>>>>>> 0209af4560a5303c7a650117290e6f4ecccee2ff
 				}
 			}
 			return Ok(true);

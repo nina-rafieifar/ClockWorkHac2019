@@ -21,19 +21,20 @@ namespace OutReach.API
 		}
 
 		public IConfiguration Configuration { get; }
+		readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
 			services.AddCors(options =>
 			{
 				options.AddPolicy(MyAllowSpecificOrigins,
 				builder =>
 				{
-					builder.WithOrigins("http://example.com",
-										"http://www.contoso.com");
+					builder.WithOrigins("http://localhost")
+						.AllowAnyHeader()
+						.AllowAnyOrigin();
 				});
 			});
 
@@ -54,6 +55,7 @@ namespace OutReach.API
 				app.UseHsts();
 			}
 
+			app.UseCors(MyAllowSpecificOrigins);
 			app.UseHttpsRedirection();
 			app.UseMvc();
 		}
