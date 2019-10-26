@@ -12,7 +12,7 @@ namespace OutReach.API.Models
 		public string MobilePhoneNumber { get; set; }
 	}
 
-	public class Patient : Person
+	public class PatientModel : Person
 	{
 		public DateTime DateOfBirth { get; set; }
 	}
@@ -24,6 +24,10 @@ namespace OutReach.API.Models
 
 	public class PatientProfile
 	{
-		public Patient Patient { get; set; }
+		public PatientModel Patient { get; set; }
+	}
+
+	public class PhoneNumberValidationModel {
+		public Person Person { get; set; }
 	}
 }
