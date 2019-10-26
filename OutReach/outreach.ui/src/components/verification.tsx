@@ -1,15 +1,24 @@
 import React from "react";
+import { Button } from "react-bootstrap";
+
+interface IVerificationProps {
+  /*
+   *
+   */
+}
 
 /**
- * Responsible for rendering the table component
+ * Responsible for verifiying a patient's phone number
  */
-export class Verification extends React.Component {
+export class Verification extends React.Component<IVerificationProps> {
   /**
-   * Render the table with the right properties
+   * Render the page with a name and phone number input
    */
   public render(): React.ReactNode {
-    return <></>;
+    return <Button type={"submit"} variant={"primary"} onClick={this.verify}></Button>;
   }
+
+  protected verify() {}
 }
 
 export default Verification;
