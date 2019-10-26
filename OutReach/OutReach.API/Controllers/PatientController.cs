@@ -3,14 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OutReach.API.Models;
 
 namespace OutReach.API.Controllers
 {
-    public class PatientController : Controller
+	[Route("api/[controller]")]
+	[ApiController]
+	public class PatientController : ControllerBase
     {
-        public IActionResult Index()
+		[HttpGet]
+        public ContentResult Index()
         {
-            return View();
+            return Content("You've reached the OutReach API.");
         }
-    }
+
+		[HttpGet("{phoneNumber}")]
+		public IActionResult ValidatePhoneNumber(string phoneNumber)
+		{
+			return Ok(phoneNumber + " is valid");
+		}
+   }
 }
