@@ -8,27 +8,22 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OutReach.API.Models;
 
-namespace OutReach.API.Controllers
-{
+namespace OutReach.API.Controllers {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class VerifyPhoneNumber : ControllerBase
-    {
+	public class VerifyPhoneNumberController : ControllerBase {
 		// https://www.jerriepelser.com/blog/deserialize-different-json-object-same-class/
 		/// <summary>
 		/// Validates phone number. The details are passed via the body of the message.
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet]
-		public IActionResult validate()
-		{
-			using (var reader = new StreamReader(Request.Body))
-			{
+		public IActionResult validate() {
+			using(var reader = new StreamReader(Request.Body)) {
 				var json = reader.ReadToEnd();
-				var contactDetails = (JObject)JsonConvert.DeserializeObject(json);
+				var contactDetails = (JObject) JsonConvert.DeserializeObject(json);
 
-				if(contactDetails != null)
-				{
+				if (contactDetails != null) {
 					var details = contactDetails.GetEnumerator();
 
 					//do

@@ -22,6 +22,11 @@ interface IVerificationProps {
  * Responsible for verifiying a patient's phone number
  */
 export class Verification extends React.Component<IVerificationProps> {
+  constructor(props: any, context?: any) {
+    super(props, context);
+    this.verify = this.verify.bind(this);
+  }
+
   /**
    * Render the page with a name and phone number input
    */
@@ -30,12 +35,8 @@ export class Verification extends React.Component<IVerificationProps> {
   }
 
   protected verify() {
-    fetch("/api/verifyphonenumber", {
+    fetch("https://356282fd.ngrok.io/clockwork/api/VerifyPhoneNumber", {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
       body: JSON.stringify({
         patientForename: this.props.patientForename,
         patientSurname: this.props.patientSurname,

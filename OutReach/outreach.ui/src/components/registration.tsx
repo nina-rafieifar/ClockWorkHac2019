@@ -2,18 +2,17 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-interface IRegistrationProps {
-}
+interface IRegistrationProps {}
 interface IRegistrationState {
-  forename: string
-  surname: string
-  mobileNumber: string
-  dateOfBirth: string
+  forename: string;
+  surname: string;
+  mobileNumber: string;
+  dateOfBirth: string;
   supportPeople: {
-    name: string
-    mobileNumber: string
-    relationship: string
-  }[]
+    name: string;
+    mobileNumber: string;
+    relationship: string;
+  }[];
 }
 
 export class Registration extends React.Component<IRegistrationProps, IRegistrationState> {
@@ -24,9 +23,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
       surname: "",
       mobileNumber: "",
       dateOfBirth: "",
-      supportPeople: [
-        {name:"", mobileNumber:"", relationship:""}
-      ]
+      supportPeople: [{ name: "", mobileNumber: "", relationship: "" }]
     };
     this.handleForenameChange = this.handleForenameChange.bind(this);
     this.handleSurnameChange = this.handleSurnameChange.bind(this);
@@ -61,7 +58,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
 
   protected addSupportPerson() {
     this.setState({
-      supportPeople: this.state.supportPeople.concat([{ name:"", mobileNumber:"", relationship:""}])
+      supportPeople: this.state.supportPeople.concat([{ name: "", mobileNumber: "", relationship: "" }])
     });
   }
 
@@ -72,7 +69,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
     });
 
     this.setState({ supportPeople: newSupportPeople });
-  };
+  }
 
   /**
    * Render the registration component
@@ -83,35 +80,19 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
         <Form>
           <Form.Group controlId="formForename">
             <Form.Label>Forename</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter forename"
-              onChange={this.handleForenameChange}
-            />
+            <Form.Control type="text" placeholder="Enter forename" onChange={this.handleForenameChange} />
           </Form.Group>
           <Form.Group controlId="formSurname">
             <Form.Label>Surname</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter surname"
-              onChange={this.handleSurnameChange}
-            />
+            <Form.Control type="text" placeholder="Enter surname" onChange={this.handleSurnameChange} />
           </Form.Group>
           <Form.Group controlId="formMobileNumber">
             <Form.Label>Mobile number</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter mobile number"
-              onChange={this.handleMobileNumberChange}
-            />
+            <Form.Control type="text" placeholder="Enter mobile number" onChange={this.handleMobileNumberChange} />
           </Form.Group>
           <Form.Group controlId="formDateOfBirth">
             <Form.Label>Date of birth</Form.Label>
-            <Form.Control
-              type="date"
-              placeholder="Enter date of birth"
-              onChange={this.handleDateOfBirthChange}
-            />
+            <Form.Control type="date" placeholder="Enter date of birth" onChange={this.handleDateOfBirthChange} />
           </Form.Group>
           {this.state.supportPeople.map((supportPerson, idx) => (
             <div className="supportPeople">
@@ -121,7 +102,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
                   type="text"
                   placeholder="Enter name"
                   value={supportPerson.name}
-                  onChange={this.handleSupportPersonNameChange(idx)}
+                  // onChange={this.handleSupportPersonNameChange(idx)}
                 />
               </Form.Group>
             </div>
