@@ -9,11 +9,9 @@ interface IRegistrationState {
   surname: string
   mobileNumber: string
   dateOfBirth: string
-  supportPeople: {
-    name: string
-    mobileNumber: string
-    relationship: string
-  }[]
+  supportPersonName: string
+  supportPersonMobileNumber: string
+  supportPersonRelationship: string
 }
 
 export class Registration extends React.Component<IRegistrationProps, IRegistrationState> {
@@ -24,15 +22,17 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
       surname: "",
       mobileNumber: "",
       dateOfBirth: "",
-      supportPeople: [
-        {name:"", mobileNumber:"", relationship:""}
-      ]
+      supportPersonName: "",
+      supportPersonMobileNumber: "",
+      supportPersonRelationship: ""
     };
     this.handleForenameChange = this.handleForenameChange.bind(this);
     this.handleSurnameChange = this.handleSurnameChange.bind(this);
     this.handleMobileNumberChange = this.handleMobileNumberChange.bind(this);
     this.handleDateOfBirthChange = this.handleDateOfBirthChange.bind(this);
-    this.addSupportPerson = this.addSupportPerson.bind(this);
+    this.handleSupportPersonNameChange = this.handleSupportPersonNameChange.bind(this);
+    this.handleSupportPersonMobileNumberChange = this.handleSupportPersonMobileNumberChange.bind(this);
+    this.handleSupportPersonRelationshipChange = this.handleSupportPersonRelationshipChange.bind(this);
   }
 
   protected handleForenameChange({ target }: any) {
@@ -59,19 +59,22 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
     });
   }
 
-  protected addSupportPerson() {
+  protected handleSupportPersonNameChange({ target }: any) {
     this.setState({
-      supportPeople: this.state.supportPeople.concat([{ name:"", mobileNumber:"", relationship:""}])
+      supportPersonName: target.value
     });
-  }
+  };
 
-  protected handleSupportPersonNameChange(idx: number, { target }: any) {
-    const newSupportPeople = this.state.supportPeople.map((supportPeople, sidx) => {
-      if (idx !== sidx) return supportPeople;
-      return { ...supportPeople, name: target.value };
+  protected handleSupportPersonMobileNumberChange({ target }: any) {
+    this.setState({
+      supportPersonMobileNumber: target.value
     });
+  };
 
-    this.setState({ supportPeople: newSupportPeople });
+  protected handleSupportPersonRelationshipChange({ target }: any) {
+    this.setState({
+      supportPersonRelationship: target.value
+    });
   };
 
   /**
@@ -113,20 +116,33 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
               onChange={this.handleDateOfBirthChange}
             />
           </Form.Group>
-          {this.state.supportPeople.map((supportPerson, idx) => (
-            <div className="supportPeople">
-              <Form.Group controlId="formSupportPersonName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter name"
-                  value={supportPerson.name}
-                  onChange={this.handleSupportPersonNameChange(idx)}
-                />
-              </Form.Group>
-            </div>
-          ))}
-          <Button onClick={this.addSupportPerson}>Add new support person</Button>
+          <Form.Group controlId="formSupportPersonName">
+            <Form.Label>Support person name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter support person name"
+              onChange={this.handleSupportPersonNameChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formSupportPersonMobileNumber">
+            <Form.Label>Support person mobile number</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter support person mobile number"
+              onChange={this.handleSupportPersonMobileNumberChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formSupportPersonRelationship">
+            <Form.Label>Support person relationship</Form.Label>
+            <Form.Control
+              as="select"
+              placeholder="Enter support person relationship"
+              onChange={this.handleSupportPersonRelationshipChange}
+            >
+              <option>Friend</option>
+              <option>Relation</option>
+            </Form.Control>
+          </Form.Group>
         </Form>
       </div>
     );
