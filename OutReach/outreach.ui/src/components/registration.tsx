@@ -46,7 +46,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
     this.handleMedicationFrequencyChange = this.handleMedicationFrequencyChange.bind(this);
     this.handleMedicationFormChange = this.handleMedicationFormChange.bind(this);
     this.handleMedicationDosageChange = this.handleMedicationDosageChange.bind(this);
-    this.handleMedicationNotesChange = this.handleMedicationNotesChange.bind(this);
+    this.register = this.register.bind(this);
   }
 
   protected handleForenameChange({ target }: any) {
@@ -118,6 +118,18 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
   protected handleMedicationNotesChange({ target }: any) {
     this.setState({
       medicationNotes: target.value
+    });
+  }
+
+  protected register() {
+    let url = process.env.REACT_APP_API_URL as string;
+    fetch(url + "/api/register", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
     });
   }
 
@@ -204,6 +216,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
               onChange={this.handleMedicationNotesChange}
             />
           </Form.Group>
+          <Button onClick={this.register}>Register</Button>
         </Form>
       </div>
     );
