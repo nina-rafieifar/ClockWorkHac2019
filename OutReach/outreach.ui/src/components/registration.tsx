@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import { string } from "prop-types";
+import Button from "react-bootstrap/Button";
 
 interface IRegistrationProps {
 }
@@ -9,6 +9,11 @@ interface IRegistrationState {
   surname: string
   mobileNumber: string
   dateOfBirth: string
+  supportPeople: {
+    name: string
+    mobileNumber: string
+    relationship: string
+  }[]
 }
 
 export class Registration extends React.Component<IRegistrationProps, IRegistrationState> {
@@ -18,12 +23,16 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
       forename: "",
       surname: "",
       mobileNumber: "",
-      dateOfBirth: ""
+      dateOfBirth: "",
+      supportPeople: [
+        {name:"", mobileNumber:"", relationship:""}
+      ]
     };
     this.handleForenameChange = this.handleForenameChange.bind(this);
     this.handleSurnameChange = this.handleSurnameChange.bind(this);
     this.handleMobileNumberChange = this.handleMobileNumberChange.bind(this);
     this.handleDateOfBirthChange = this.handleDateOfBirthChange.bind(this);
+    this.addSupportPerson = this.addSupportPerson.bind(this);
   }
 
   protected handleForenameChange({ target }: any) {
@@ -49,6 +58,21 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
       dateOfBirth: target.value
     });
   }
+
+  protected addSupportPerson() {
+    this.setState({
+      supportPeople: this.state.supportPeople.concat([{ name:"", mobileNumber:"", relationship:""}])
+    });
+  }
+
+  protected handleSupportPersonNameChange(idx: number, { target }: any) {
+    const newSupportPeople = this.state.supportPeople.map((supportPeople, sidx) => {
+      if (idx !== sidx) return supportPeople;
+      return { ...supportPeople, name: target.value };
+    });
+
+    this.setState({ supportPeople: newSupportPeople });
+  };
 
   /**
    * Render the registration component
@@ -89,6 +113,20 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
               onChange={this.handleDateOfBirthChange}
             />
           </Form.Group>
+          {this.state.supportPeople.map((supportPerson, idx) => (
+            <div className="supportPeople">
+              <Form.Group controlId="formSupportPersonName">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter name"
+                  value={supportPerson.name}
+                  onChange={this.handleSupportPersonNameChange(idx)}
+                />
+              </Form.Group>
+            </div>
+          ))}
+          <Button onClick={this.addSupportPerson}>Add new support person</Button>
         </Form>
       </div>
     );
