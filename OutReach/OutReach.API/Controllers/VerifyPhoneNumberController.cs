@@ -1,40 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using OutReach.API.Models;
+using OutReach.API.Tools;
 
 namespace OutReach.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class VerifyPhoneNumber : ControllerBase
+	public class VerifyPhoneNumberController : ControllerBase
     {
+
 		// https://www.jerriepelser.com/blog/deserialize-different-json-object-same-class/
 		/// <summary>
 		/// Validates phone number. The details are passed via the body of the message.
 		/// </summary>
 		/// <returns></returns>
-		[HttpGet]
+		[HttpPost]
 		public IActionResult validate()
 		{
 			using (var reader = new StreamReader(Request.Body))
 			{
 				var json = reader.ReadToEnd();
-				var contactDetails = (JObject)JsonConvert.DeserializeObject(json);
+				var contactDetails = JsonConvert.DeserializeObject<VerifyContactNumberModel>(json);
 
 				if(contactDetails != null)
 				{
-					var details = contactDetails.GetEnumerator();
-
-					//do
-					//{
-					//	details.Current.Value;
-					//}
+					var clockWorkUtility = new ClockWorkUtiliity();
+					clockWorkUtility.sendMessage(contactDetails.PhoneNumber, "You have received this message to confirm your phone number. Please text OPTIN or OPTOUT?");
 				}
 			}
 			return Ok(true);

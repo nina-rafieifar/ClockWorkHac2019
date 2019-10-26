@@ -27,7 +27,4 @@ namespace OutReach.API.Models
 		public Patient Patient { get; set; }
 	}
 
-	public class PhoneNumberValidationModel {
-		public Person Person { get; set; }
-	}
 }
