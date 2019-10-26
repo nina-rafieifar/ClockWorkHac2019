@@ -12,6 +12,11 @@ interface IRegistrationState {
   supportPersonName: string
   supportPersonMobileNumber: string
   supportPersonRelationship: string
+  medicationName: string
+  medicationFrequency: string
+  medicationForm: string
+  medicationDosage: string
+  medicationNotes: string
 }
 
 export class Registration extends React.Component<IRegistrationProps, IRegistrationState> {
@@ -24,7 +29,12 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
       dateOfBirth: "",
       supportPersonName: "",
       supportPersonMobileNumber: "",
-      supportPersonRelationship: ""
+      supportPersonRelationship: "Friend",
+      medicationName: "",
+      medicationFrequency: "Hourly",
+      medicationForm: "",
+      medicationDosage: "",
+      medicationNotes: ""
     };
     this.handleForenameChange = this.handleForenameChange.bind(this);
     this.handleSurnameChange = this.handleSurnameChange.bind(this);
@@ -33,6 +43,11 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
     this.handleSupportPersonNameChange = this.handleSupportPersonNameChange.bind(this);
     this.handleSupportPersonMobileNumberChange = this.handleSupportPersonMobileNumberChange.bind(this);
     this.handleSupportPersonRelationshipChange = this.handleSupportPersonRelationshipChange.bind(this);
+    this.handleMedicationNameChange = this.handleMedicationNameChange.bind(this);
+    this.handleMedicationFrequencyChange = this.handleMedicationFrequencyChange.bind(this);
+    this.handleMedicationFormChange = this.handleMedicationFormChange.bind(this);
+    this.handleMedicationDosageChange = this.handleMedicationDosageChange.bind(this);
+    this.handleMedicationNotesChange = this.handleMedicationNotesChange.bind(this);
   }
 
   protected handleForenameChange({ target }: any) {
@@ -74,6 +89,36 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
   protected handleSupportPersonRelationshipChange({ target }: any) {
     this.setState({
       supportPersonRelationship: target.value
+    });
+  };
+
+  protected handleMedicationNameChange({ target }: any) {
+    this.setState({
+      medicationName: target.value
+    });
+  };
+
+  protected handleMedicationFrequencyChange({ target }: any) {
+    this.setState({
+      medicationFrequency: target.value
+    });
+  };
+
+  protected handleMedicationFormChange({ target }: any) {
+    this.setState({
+      medicationFrequency: target.value
+    });
+  };
+
+  protected handleMedicationDosageChange({ target }: any) {
+    this.setState({
+      medicationDosage: target.value
+    });
+  };
+
+  protected handleMedicationNotesChange({ target }: any) {
+    this.setState({
+      medicationNotes: target.value
     });
   };
 
@@ -136,12 +181,58 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
             <Form.Label>Support person relationship</Form.Label>
             <Form.Control
               as="select"
-              placeholder="Enter support person relationship"
               onChange={this.handleSupportPersonRelationshipChange}
             >
               <option>Friend</option>
-              <option>Relation</option>
+              <option>Relative</option>
             </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formMedicationName">
+            <Form.Label>Medication name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter medication name"
+              onChange={this.handleMedicationNameChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formMedicationFrequency">
+            <Form.Label>Medication frequency</Form.Label>
+            <Form.Control
+              as="select"
+              onChange={this.handleMedicationFrequencyChange}
+            >
+              <option>Hourly</option>
+              <option>Daily</option>
+              <option>Weekly</option>
+              <option>Monthly</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formMedicationForm">
+            <Form.Label>Medication form</Form.Label>
+            <Form.Control
+              as="select"
+              onChange={this.handleMedicationFormChange}
+            >
+              <option>Tablet</option>
+              <option>Liquid</option>
+              <option>Injection</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formMedicationDosage">
+            <Form.Label>Medication dosage</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter medication dosage"
+              onChange={this.handleMedicationDosageChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formMedicationNotes">
+            <Form.Label>Medication notes</Form.Label>
+            <Form.Control
+              type="textarea"
+              placeholder="Enter medication notes"
+              onChange={this.handleMedicationNotesChange}
+            />
           </Form.Group>
         </Form>
       </div>
