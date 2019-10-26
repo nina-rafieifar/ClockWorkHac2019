@@ -8,11 +8,14 @@ interface IRegistrationState {
   surname: string;
   mobileNumber: string;
   dateOfBirth: string;
-  supportPeople: {
-    name: string;
-    mobileNumber: string;
-    relationship: string;
-  }[];
+  supportPersonName: string;
+  supportPersonMobileNumber: string;
+  supportPersonRelationship: string;
+  medicationName: string;
+  medicationFrequency: string;
+  medicationForm: string;
+  medicationDosage: string;
+  medicationNotes: string;
 }
 
 export class Registration extends React.Component<IRegistrationProps, IRegistrationState> {
@@ -23,13 +26,27 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
       surname: "",
       mobileNumber: "",
       dateOfBirth: "",
-      supportPeople: [{ name: "", mobileNumber: "", relationship: "" }]
+      supportPersonName: "",
+      supportPersonMobileNumber: "",
+      supportPersonRelationship: "Friend",
+      medicationName: "",
+      medicationFrequency: "Hourly",
+      medicationForm: "",
+      medicationDosage: "",
+      medicationNotes: ""
     };
     this.handleForenameChange = this.handleForenameChange.bind(this);
     this.handleSurnameChange = this.handleSurnameChange.bind(this);
     this.handleMobileNumberChange = this.handleMobileNumberChange.bind(this);
     this.handleDateOfBirthChange = this.handleDateOfBirthChange.bind(this);
-    this.addSupportPerson = this.addSupportPerson.bind(this);
+    this.handleSupportPersonNameChange = this.handleSupportPersonNameChange.bind(this);
+    this.handleSupportPersonMobileNumberChange = this.handleSupportPersonMobileNumberChange.bind(this);
+    this.handleSupportPersonRelationshipChange = this.handleSupportPersonRelationshipChange.bind(this);
+    this.handleMedicationNameChange = this.handleMedicationNameChange.bind(this);
+    this.handleMedicationFrequencyChange = this.handleMedicationFrequencyChange.bind(this);
+    this.handleMedicationFormChange = this.handleMedicationFormChange.bind(this);
+    this.handleMedicationDosageChange = this.handleMedicationDosageChange.bind(this);
+    this.handleMedicationNotesChange = this.handleMedicationNotesChange.bind(this);
   }
 
   protected handleForenameChange({ target }: any) {
@@ -56,19 +73,52 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
     });
   }
 
-  protected addSupportPerson() {
+  protected handleSupportPersonNameChange({ target }: any) {
     this.setState({
-      supportPeople: this.state.supportPeople.concat([{ name: "", mobileNumber: "", relationship: "" }])
+      supportPersonName: target.value
     });
   }
 
-  protected handleSupportPersonNameChange(idx: number, { target }: any) {
-    const newSupportPeople = this.state.supportPeople.map((supportPeople, sidx) => {
-      if (idx !== sidx) return supportPeople;
-      return { ...supportPeople, name: target.value };
+  protected handleSupportPersonMobileNumberChange({ target }: any) {
+    this.setState({
+      supportPersonMobileNumber: target.value
     });
+  }
 
-    this.setState({ supportPeople: newSupportPeople });
+  protected handleSupportPersonRelationshipChange({ target }: any) {
+    this.setState({
+      supportPersonRelationship: target.value
+    });
+  }
+
+  protected handleMedicationNameChange({ target }: any) {
+    this.setState({
+      medicationName: target.value
+    });
+  }
+
+  protected handleMedicationFrequencyChange({ target }: any) {
+    this.setState({
+      medicationFrequency: target.value
+    });
+  }
+
+  protected handleMedicationFormChange({ target }: any) {
+    this.setState({
+      medicationFrequency: target.value
+    });
+  }
+
+  protected handleMedicationDosageChange({ target }: any) {
+    this.setState({
+      medicationDosage: target.value
+    });
+  }
+
+  protected handleMedicationNotesChange({ target }: any) {
+    this.setState({
+      medicationNotes: target.value
+    });
   }
 
   /**
@@ -94,20 +144,66 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
             <Form.Label>Date of birth</Form.Label>
             <Form.Control type="date" placeholder="Enter date of birth" onChange={this.handleDateOfBirthChange} />
           </Form.Group>
-          {this.state.supportPeople.map((supportPerson, idx) => (
-            <div className="supportPeople">
-              <Form.Group controlId="formSupportPersonName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter name"
-                  value={supportPerson.name}
-                  // onChange={this.handleSupportPersonNameChange(idx)}
-                />
-              </Form.Group>
-            </div>
-          ))}
-          <Button onClick={this.addSupportPerson}>Add new support person</Button>
+          <Form.Group controlId="formSupportPersonName">
+            <Form.Label>Support person name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter support person name"
+              onChange={this.handleSupportPersonNameChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formSupportPersonMobileNumber">
+            <Form.Label>Support person mobile number</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter support person mobile number"
+              onChange={this.handleSupportPersonMobileNumberChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formSupportPersonRelationship">
+            <Form.Label>Support person relationship</Form.Label>
+            <Form.Control as="select" onChange={this.handleSupportPersonRelationshipChange}>
+              <option>Friend</option>
+              <option>Relative</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formMedicationName">
+            <Form.Label>Medication name</Form.Label>
+            <Form.Control type="text" placeholder="Enter medication name" onChange={this.handleMedicationNameChange} />
+          </Form.Group>
+          <Form.Group controlId="formMedicationFrequency">
+            <Form.Label>Medication frequency</Form.Label>
+            <Form.Control as="select" onChange={this.handleMedicationFrequencyChange}>
+              <option>Hourly</option>
+              <option>Daily</option>
+              <option>Weekly</option>
+              <option>Monthly</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formMedicationForm">
+            <Form.Label>Medication form</Form.Label>
+            <Form.Control as="select" onChange={this.handleMedicationFormChange}>
+              <option>Tablet</option>
+              <option>Liquid</option>
+              <option>Injection</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formMedicationDosage">
+            <Form.Label>Medication dosage</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter medication dosage"
+              onChange={this.handleMedicationDosageChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formMedicationNotes">
+            <Form.Label>Medication notes</Form.Label>
+            <Form.Control
+              type="textarea"
+              placeholder="Enter medication notes"
+              onChange={this.handleMedicationNotesChange}
+            />
+          </Form.Group>
         </Form>
       </div>
     );
