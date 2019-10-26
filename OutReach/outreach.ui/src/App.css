@@ -4,6 +4,8 @@
 
 .App-logo {
   height: 40vmin;
+  background: url("./logo192.png");
+  background-repeat: round;
 }
 
 .App-header {
