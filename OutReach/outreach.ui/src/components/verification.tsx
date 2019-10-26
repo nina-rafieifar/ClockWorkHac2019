@@ -2,9 +2,20 @@ import React from "react";
 import { Button } from "react-bootstrap";
 
 interface IVerificationProps {
-  /*
-   *
+  /**
+   * Patient Forename
    */
+  patientForename: any;
+
+  /**
+   * Patient Surname
+   */
+  patientSurname: any;
+
+  /**
+   * Phone number
+   */
+  phoneNumber: any;
 }
 
 /**
@@ -18,7 +29,20 @@ export class Verification extends React.Component<IVerificationProps> {
     return <Button type={"submit"} variant={"primary"} onClick={this.verify}></Button>;
   }
 
-  protected verify() {}
+  protected verify() {
+    fetch("/api/verifyphonenumber", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        patientForename: this.props.patientForename,
+        patientSurname: this.props.patientSurname,
+        phoneNumber: this.props.phoneNumber
+      })
+    });
+  }
 }
 
 export default Verification;
