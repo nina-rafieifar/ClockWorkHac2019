@@ -9,6 +9,7 @@ namespace OutReach.API.Tools
 		public void sendMessage(string phoneNumber, string message)
 		{
 			var key = "68c08ff8190e755bf4cc76e08f1ab7f71bf275b4";
+			var fromPhoneNumber = "+44 7860 033 387";
 			try
 			{
 				Clockwork.API api = new Clockwork.API(key);
@@ -16,7 +17,8 @@ namespace OutReach.API.Tools
 					new SMS
 					{
 						To = phoneNumber,
-						Message = message
+						Message = message,
+						From = fromPhoneNumber
 					});
 
 				if (result.Success)
