@@ -1,6 +1,5 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Col, Label, Input, Button, Form, FormGroup } from "reactstrap";
 
 interface IRegistrationProps {}
 interface IRegistrationState {
@@ -105,7 +104,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
 
   protected handleMedicationFormChange({ target }: any) {
     this.setState({
-      medicationFrequency: target.value
+      medicationForm: target.value
     });
   }
 
@@ -138,86 +137,96 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
    */
   public render() {
     return (
-      <div>
-        <Form>
-          <Form.Group controlId="formForename">
-            <Form.Label>Forename</Form.Label>
-            <Form.Control type="text" placeholder="Enter forename" onChange={this.handleForenameChange} />
-          </Form.Group>
-          <Form.Group controlId="formSurname">
-            <Form.Label>Surname</Form.Label>
-            <Form.Control type="text" placeholder="Enter surname" onChange={this.handleSurnameChange} />
-          </Form.Group>
-          <Form.Group controlId="formMobileNumber">
-            <Form.Label>Mobile number</Form.Label>
-            <Form.Control type="text" placeholder="Enter mobile number" onChange={this.handleMobileNumberChange} />
-          </Form.Group>
-          <Form.Group controlId="formDateOfBirth">
-            <Form.Label>Date of birth</Form.Label>
-            <Form.Control type="date" placeholder="Enter date of birth" onChange={this.handleDateOfBirthChange} />
-          </Form.Group>
-          <Form.Group controlId="formSupportPersonName">
-            <Form.Label>Support person name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter support person name"
-              onChange={this.handleSupportPersonNameChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="formSupportPersonMobileNumber">
-            <Form.Label>Support person mobile number</Form.Label>
-            <Form.Control
+      <div className="formRegistration">
+        <Col>
+          <FormGroup controlId="formForename">
+            <Label>Forename</Label>
+            <Input type="text" placeholder="Enter forename" onChange={this.handleForenameChange} />
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup controlId="formSurname">
+            <Label>Surname</Label>
+            <Input type="text" placeholder="Enter surname" onChange={this.handleSurnameChange} />
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup controlId="formMobileNumber">
+            <Label>Mobile number</Label>
+            <Input type="text" placeholder="Enter mobile number" onChange={this.handleMobileNumberChange} />
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup controlId="formDateOfBirth">
+            <Label>Date of birth</Label>
+            <Input type="date" placeholder="Enter date of birth" onChange={this.handleDateOfBirthChange} />
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup controlId="formSupportPersonName">
+            <Label>Support person name</Label>
+            <Input type="text" placeholder="Enter support person name" onChange={this.handleSupportPersonNameChange} />
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup controlId="formSupportPersonMobileNumber">
+            <Label>Support person mobile number</Label>
+            <Input
               type="text"
               placeholder="Enter support person mobile number"
               onChange={this.handleSupportPersonMobileNumberChange}
             />
-          </Form.Group>
-          <Form.Group controlId="formSupportPersonRelationship">
-            <Form.Label>Support person relationship</Form.Label>
-            <Form.Control as="select" onChange={this.handleSupportPersonRelationshipChange}>
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup controlId="formSupportPersonRelationship">
+            <Label>Support person relationship</Label>
+            <Input as="select" onChange={this.handleSupportPersonRelationshipChange}>
               <option>Friend</option>
               <option>Relative</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="formMedicationName">
-            <Form.Label>Medication name</Form.Label>
-            <Form.Control type="text" placeholder="Enter medication name" onChange={this.handleMedicationNameChange} />
-          </Form.Group>
-          <Form.Group controlId="formMedicationFrequency">
-            <Form.Label>Medication frequency</Form.Label>
-            <Form.Control as="select" onChange={this.handleMedicationFrequencyChange}>
+            </Input>
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup controlId="formMedicationName">
+            <Label>Medication name</Label>
+            <Input type="text" placeholder="Enter medication name" onChange={this.handleMedicationNameChange} />
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup controlId="formMedicationFrequency">
+            <Label>Medication frequency</Label>
+            <Input as="select" onChange={this.handleMedicationFrequencyChange}>
               <option>Hourly</option>
               <option>Daily</option>
               <option>Weekly</option>
               <option>Monthly</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="formMedicationForm">
-            <Form.Label>Medication form</Form.Label>
-            <Form.Control as="select" onChange={this.handleMedicationFormChange}>
+            </Input>
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup controlId="formMedicationForm">
+            <Label>Medication form</Label>
+            <Input as="select" onChange={this.handleMedicationFormChange}>
               <option>Tablet</option>
               <option>Liquid</option>
               <option>Injection</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="formMedicationDosage">
-            <Form.Label>Medication dosage</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter medication dosage"
-              onChange={this.handleMedicationDosageChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="formMedicationNotes">
-            <Form.Label>Medication notes</Form.Label>
-            <Form.Control
-              type="textarea"
-              placeholder="Enter medication notes"
-              onChange={this.handleMedicationNotesChange}
-            />
-          </Form.Group>
-          <Button onClick={this.register}>Register</Button>
-        </Form>
+            </Input>
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup controlId="formMedicationDosage">
+            <Label>Medication dosage</Label>
+            <Input type="text" placeholder="Enter medication dosage" onChange={this.handleMedicationDosageChange} />
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup controlId="formMedicationNotes">
+            <Label>Medication notes</Label>
+            <Input type="textarea" placeholder="Enter medication notes" onChange={this.handleMedicationNotesChange} />
+          </FormGroup>
+        </Col>
+        <Button onClick={this.register}>Register</Button>
       </div>
     );
   }
