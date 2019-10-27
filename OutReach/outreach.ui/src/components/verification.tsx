@@ -136,6 +136,28 @@ export class Verification extends React.Component<IVerificationProps, IVerificat
       fetch(this.url + "PatientRegistration?mobilePhoneNumber=" + this.state.mobileNumber)
         .then(response => {
           if (response.status != 200) {
+            fetch(this.url + "VerifyPhoneNumber", {
+              method: "POST",
+              body: JSON.stringify({
+                Forename: this.state.forename,
+                Surname: this.state.surname,
+                phoneNumber: this.state.mobileNumber
+              })
+            })
+              .then(response => {
+                return response.text();
+              })
+              .then(result => {
+                const message = document.getElementById("message");
+                if (message) {
+                  message.innerHTML =
+                    "<p>A text message has been sent to " +
+                    this.state.mobileNumber +
+                    ". Please verify your mobile number by responding `OPTIN`. </p>";
+                  message.style.display = "block";
+                }
+                this.setState({ isVerified: false });
+              });
             return JSON.parse("{}");
           } else return response.text();
         })
