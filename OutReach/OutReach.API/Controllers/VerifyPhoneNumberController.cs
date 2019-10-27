@@ -1,10 +1,11 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using OutReach.API.Models;
 using OutReach.API.Tools;
+using OutReach.Libary.Models;
 
-namespace OutReach.API.Controllers {
+namespace OutReach.API.Controllers
+{
 	[Route("api/[controller]")]
 	[ApiController]
 	public class VerifyPhoneNumberController : ControllerBase {

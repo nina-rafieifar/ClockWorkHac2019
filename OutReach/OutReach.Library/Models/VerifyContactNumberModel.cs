@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OutReach.API.Models
+namespace OutReach.Libary.Models
 {
 	public class VerifyContactNumberModel
 	{

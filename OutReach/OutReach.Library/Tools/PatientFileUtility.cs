@@ -12,10 +12,10 @@ namespace OutReach.API.Tools
 		{
 			var filePath = $"\\Data\\{phoneNumber}.json";
 
-			using(var fileStream = new StreamWriter(filePath, true))
-			{
-
-			}
+			//using(var fs = new File(filePath, true))
+			//{
+			//	fs.Write()
+			//}
 		}
 	}
 }
