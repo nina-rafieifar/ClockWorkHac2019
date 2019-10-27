@@ -3,9 +3,6 @@ import { Col, Label, Input, Button, Form, FormGroup } from "reactstrap";
 
 interface IRegistrationProps {}
 interface IRegistrationState {
-  forename: string;
-  surname: string;
-  mobileNumber: string;
   dateOfBirth: string;
   supportPersonName: string;
   supportPersonMobileNumber: string;
@@ -21,9 +18,6 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
   constructor(props: IRegistrationProps, context?: IRegistrationState) {
     super(props, context);
     this.state = {
-      forename: "",
-      surname: "",
-      mobileNumber: "",
       dateOfBirth: "",
       supportPersonName: "",
       supportPersonMobileNumber: "",
@@ -34,9 +28,6 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
       medicationDosage: "",
       medicationNotes: ""
     };
-    this.handleForenameChange = this.handleForenameChange.bind(this);
-    this.handleSurnameChange = this.handleSurnameChange.bind(this);
-    this.handleMobileNumberChange = this.handleMobileNumberChange.bind(this);
     this.handleDateOfBirthChange = this.handleDateOfBirthChange.bind(this);
     this.handleSupportPersonNameChange = this.handleSupportPersonNameChange.bind(this);
     this.handleSupportPersonMobileNumberChange = this.handleSupportPersonMobileNumberChange.bind(this);
@@ -46,24 +37,6 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
     this.handleMedicationFormChange = this.handleMedicationFormChange.bind(this);
     this.handleMedicationDosageChange = this.handleMedicationDosageChange.bind(this);
     this.register = this.register.bind(this);
-  }
-
-  protected handleForenameChange({ target }: any) {
-    this.setState({
-      forename: target.value
-    });
-  }
-
-  protected handleSurnameChange({ target }: any) {
-    this.setState({
-      surname: target.value
-    });
-  }
-
-  protected handleMobileNumberChange({ target }: any) {
-    this.setState({
-      mobileNumber: target.value
-    });
   }
 
   protected handleDateOfBirthChange({ target }: any) {
@@ -138,24 +111,6 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
   public render() {
     return (
       <div className="formRegistration">
-        <Col>
-          <FormGroup controlId="formForename">
-            <Label>Forename</Label>
-            <Input type="text" placeholder="Enter forename" onChange={this.handleForenameChange} />
-          </FormGroup>
-        </Col>
-        <Col>
-          <FormGroup controlId="formSurname">
-            <Label>Surname</Label>
-            <Input type="text" placeholder="Enter surname" onChange={this.handleSurnameChange} />
-          </FormGroup>
-        </Col>
-        <Col>
-          <FormGroup controlId="formMobileNumber">
-            <Label>Mobile number</Label>
-            <Input type="text" placeholder="Enter mobile number" onChange={this.handleMobileNumberChange} />
-          </FormGroup>
-        </Col>
         <Col>
           <FormGroup controlId="formDateOfBirth">
             <Label>Date of birth</Label>
