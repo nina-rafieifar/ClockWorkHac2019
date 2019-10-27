@@ -22,13 +22,22 @@ namespace OutReach.API.Controllers
 			result.Append("Id : " + id + "; ");
 			result.Append("to : " + to + "; ");
 			result.Append("from : " + from + "; ");
-			result.Append("keyword : " + keyword + "; ");
 			result.Append("content : " + content + "; ");
 
-			var actionWord = getKeyword(content);
+			var parsedKeyword = getKeyword(content);
 
 			var clockWorkUtility = new ClockWorkUtiliity();
-			var resultMessage = clockWorkUtility.sendMessage(from, $"Echo {result.ToString()}");
+			var resultMessage = clockWorkUtility.sendMessage(from, $"Echo {result.ToString()} and the keyword is : {parsedKeyword}");
+
+			switch(parsedKeyword)
+			{
+				case "CONSENT":
+					// todo: add interaction here
+					break;
+				case "FEELING":
+					// todo: add interaction here
+					break;
+			}
 
 			return Ok(resultMessage);
 		}
