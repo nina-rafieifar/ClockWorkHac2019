@@ -76,6 +76,8 @@ namespace OutReach.API.Controllers
 
 		private string GetCatVideoUrl()
 		{
+			string api_key = "704060f2-e049-417f-b282-5f9f97bbab2a";
+
 			return "";
 		}
     }
