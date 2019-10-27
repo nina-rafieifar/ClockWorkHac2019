@@ -17,6 +17,7 @@ namespace OutReach.API.Tools {
 			_forename = forename;
 			_surname = surname;
 			_mobileVerified = mobileVerified;
+			SavePatientConsent();
 		}
 
 		/// <summary>
