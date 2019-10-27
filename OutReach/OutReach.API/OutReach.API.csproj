@@ -14,6 +14,11 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OutReach.Library\OutReach.Library.csproj" />
   </ItemGroup>
 
 </Project>

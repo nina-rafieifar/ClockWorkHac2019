@@ -77,7 +77,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
 
   protected handleMedicationFormChange({ target }: any) {
     this.setState({
-      medicationFrequency: target.value
+      medicationForm: target.value
     });
   }
 
