@@ -18,16 +18,17 @@ namespace OutReach.API.Controllers
         {
 			// Receipts are comming from Mobile confirmation number and patient consent.
 
-			var result = new StringBuilder(255);
-			result.Append("Id : " + id + "; ");
-			result.Append("to : " + to + "; ");
-			result.Append("from : " + from + "; ");
-			result.Append("content : " + content + "; ");
+			//var result = new StringBuilder(255);
+			//result.Append("Id : " + id + "; ");
+			//result.Append("to : " + to + "; ");
+			//result.Append("from : " + from + "; ");
+			//result.Append("content : " + content + "; ");
 
 			var parsedKeyword = getKeyword(content);
 
 			var clockWorkUtility = new ClockWorkUtiliity();
-			var resultMessage = clockWorkUtility.sendMessage(from, $"Echo {result.ToString()} and the keyword is : {parsedKeyword}");
+			//var resultMessage = clockWorkUtility.sendMessage(from, $"Echo {result.ToString()} and the keyword is : {parsedKeyword}");
+			string resultMessage = "";
 
 			switch(parsedKeyword)
 			{
@@ -36,16 +37,19 @@ namespace OutReach.API.Controllers
 					resultMessage = clockWorkUtility.sendMessage(from, $"Thank you your message of CONSENT has been received.");
 					break;
 				case "FEELING":
-					words = getWords(content);
-					feeling = int.Parse(words[1]);
+					var words = getWords(content);
+					var feeling = int.Parse(words[1]);
 					if (feeling <= 5)
 					{
-						clockWorkUtility.sendMessage(from, "What does Charles Dickens keep in his spice rack? The best of thymes, the worst of thymes.");
+						resultMessage = clockWorkUtility.sendMessage(from, "What does Charles Dickens keep in his spice rack? The best of thymes, the worst of thymes.");
 					}
 					else
 					{
-						clockWorkUtility.sendMessage(from, "Know any good jokes?");
+						resultMessage = clockWorkUtility.sendMessage(from, "Know any good jokes?");
 					}
+					break;
+				case "MOBILE":
+					resultMessage = clockWorkUtility.sendMessage(from, $"Thank you your message to confirm your mobile number.");
 					break;
 			}
 
