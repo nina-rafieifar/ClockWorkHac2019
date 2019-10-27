@@ -34,7 +34,6 @@ namespace OutReach.API.Controllers
 			switch(parsedKeyword)
 			{
 				case "CONSENT":
-					// todo: add interaction here
 					resultMessage = clockWorkUtility.sendMessage(from, $"Thank you your message of CONSENT has been received.");
 					break;
 				case "FEELING":
@@ -51,6 +50,15 @@ namespace OutReach.API.Controllers
 					break;
 				case "MOBILE":
 					resultMessage = clockWorkUtility.sendMessage(from, $"Thank you your message to confirm your mobile number.");
+
+					var patientRecord = PatientFileUtility.GetPatient(from);
+					
+					var userResponse = getWords(content);
+
+					patientRecord.MobileVerified = userResponse[1].ToLower() == "ok";
+
+					PatientFileUtility.SavePatientConsent(patientRecord);
+					
 					break;
 			}
 

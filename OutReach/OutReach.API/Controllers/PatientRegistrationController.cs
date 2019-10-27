@@ -27,6 +27,21 @@ namespace OutReach.API.Controllers
 				if (registrationDetails != null)
 				{
 
+					var patientRecord = PatientFileUtility.GetPatient(registrationDetails.MobileNumber);
+
+					// update the patient details...
+					patientRecord.DateOfBirth = registrationDetails.DateOfBirth;
+					patientRecord.SupportPersonName = registrationDetails.SupportPersonName;
+					patientRecord.SupportPersonRelationship = registrationDetails.SupportPersonRelationship;
+					patientRecord.SupportPersonMobileNumber = registrationDetails.SupportPersonMobileNumber;
+					patientRecord.MedicationName = registrationDetails.MedicationName;
+					patientRecord.MedicationDosage = registrationDetails.MedicationDosage;
+					patientRecord.MedicationForm = registrationDetails.MedicationForm;
+					patientRecord.MedicationFrequency = registrationDetails.MedicationFrequency;
+					patientRecord.MedicationNotes = registrationDetails.MedicationNotes;
+					
+					PatientFileUtility.SavePatientConsent(patientRecord);
+
 					var clockWorkUtility = new ClockWorkUtiliity();
 					var resultMessage = clockWorkUtility.sendMessage(registrationDetails.MobileNumber, "You have agreed an OutReach care plan. To confirm you consent, please reply to this message with either CONSENT Yes or CONSENT No.");
 				}
@@ -38,32 +53,40 @@ namespace OutReach.API.Controllers
 		[HttpGet]
 		public IActionResult getPatient(string mobilePhoneNumber)
 		{
-			var registration = new RegistrationModel
-			{
-				Forename = "Conrad",
-				Surname = "Hodge",
-				MobileNumber = "447971670708",
-				DateOfBirth = "2019-10-01",
-				SupportPersonName = "Bob",
-				SupportPersonRelationship = "Relative",
-				SupportPersonMobileNumber = "441257233456",
-				MedicationName = "Paracetamol",
-				MedicationFrequency = "Daily",
-				MedicationForm = "Tablet",
-				MedicationDosage = "500mg",
-				MedicationNotes = "Take when required"
-			};
+			//var registration = new RegistrationModel
+			//{
+			//	Forename = "Conrad",
+			//	Surname = "Hodge",
+			//	MobileNumber = "447971670708",
+			//	DateOfBirth = "2019-10-01",
+			//	SupportPersonName = "Bob",
+			//	SupportPersonRelationship = "Relative",
+			//	SupportPersonMobileNumber = "441257233456",
+			//	MedicationName = "Paracetamol",
+			//	MedicationFrequency = "Daily",
+			//	MedicationForm = "Tablet",
+			//	MedicationDosage = "500mg",
+			//	MedicationNotes = "Take when required"
+			//};
+			//var registrationJson = JsonConvert.SerializeObject(registration);
 
-			var registrationJson = JsonConvert.SerializeObject(registration);
+			//if(mobilePhoneNumber == registration.MobileNumber)
+			//{
+			//	return Ok(registrationJson);
+			//} else
+			//{
+			//	return NotFound();
+			//}
+			var patientInfo = PatientFileUtility.GetPatient(mobilePhoneNumber);
 
-			if(mobilePhoneNumber == registration.MobileNumber)
+			if (patientInfo != null)
 			{
-				return Ok(registrationJson);
+				return Ok(patientInfo);
+
 			} else
 			{
 				return NotFound();
 			}
-			
 		}
 	}
 }
