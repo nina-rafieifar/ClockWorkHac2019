@@ -28,7 +28,7 @@ namespace OutReach.API.Controllers
 				{
 
 					var clockWorkUtility = new ClockWorkUtiliity();
-					clockWorkUtility.sendMessage(registrationDetails.MobileNumber, "You have agreed an OutReach care plan. To confirm you consent, please reply to this message with either CONSENT Yes or CONSENT No.");
+					var resultMessage = clockWorkUtility.sendMessage(registrationDetails.MobileNumber, "You have agreed an OutReach care plan. To confirm you consent, please reply to this message with either CONSENT Yes or CONSENT No.");
 				}
 			}
 

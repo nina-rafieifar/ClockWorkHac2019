@@ -28,9 +28,9 @@ namespace OutReach.API.Controllers
 			var actionWord = getKeyword(content);
 
 			var clockWorkUtility = new ClockWorkUtiliity();
-			clockWorkUtility.sendMessage(from, $"Echo {result.ToString()}");
+			var resultMessage = clockWorkUtility.sendMessage(from, $"Echo {result.ToString()}");
 
-			return Ok(result.ToString());
+			return Ok(resultMessage);
 		}
 
 		private string getKeyword(string message)

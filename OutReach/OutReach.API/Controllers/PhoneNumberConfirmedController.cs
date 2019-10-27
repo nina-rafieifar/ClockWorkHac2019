@@ -16,20 +16,21 @@ namespace OutReach.API.Controllers
 		{
 			var message = "";
 			var cw = new ClockWorkUtiliity();
+			var clockworkMessage = "";
 
 			switch(keyword.ToLower())
 			{
 				case "optin":
 					message = "Welcome - you have made the right choice!";
-					cw.sendMessage(from, message);
+					clockworkMessage = cw.sendMessage(from, message);
 					break;
 				case "optout":
 					message = "You have opted out! GOOD BYE!";
-					cw.sendMessage(from, message);
+					clockworkMessage = cw.sendMessage(from, message);
 					break;
 			}
 
-			return Ok(message);
+			return Ok(clockworkMessage + ";" + message);
 		}
 	}
 }
