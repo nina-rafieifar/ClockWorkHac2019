@@ -17,7 +17,7 @@ class Reminder
 			switch(type.ToLower())
 			{
 				case "mood":
-                    message = "How are you doing today " + patient.Forename + "? On a scale of 1-10, how are you feeling?";
+                    message = "How are you doing today " + patient.Forename + "? On a scale of 1-10, how are you feeling? Reply with FEELING X, where X is 1-10";
 					break;
 				case "meds":
                     message = "Hi " + patient.Forename + ", here is your reminder to take " + patient.MedicationDosage + " x " + patient.MedicationName;
