@@ -10,7 +10,7 @@ class Patient
     {
         RegistrationModel registrationDetails;
 
-        WebRequest request = WebRequest.Create("https://938d2cae.ngrok.io/clockwork/api/Patient?phoneNumber=" + mobileNumber);
+        WebRequest request = WebRequest.Create("https://938d2cae.ngrok.io/clockwork/api/PatientRegistration?mobilePhoneNumber=" + mobileNumber);
         WebResponse response = request.GetResponse();
 
         // Get the stream containing content returned by the server.

@@ -11,7 +11,7 @@ class Reminder
             var patient = Patient.Get(args[0]);
 
             var cw = new ClockWorkUtiliity();
-            var message = "Hello World";
+            var message = "Reminder: Take " + patient.MedicationDosage + " x " + patient.MedicationName;
             cw.sendMessage(patient.MobileNumber, message);
         }
         catch (Exception ex)
