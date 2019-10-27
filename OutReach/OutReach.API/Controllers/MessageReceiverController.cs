@@ -37,7 +37,16 @@ namespace OutReach.API.Controllers
 
 					break;
 				case "FEELING":
-					// todo: add interaction here
+					words = getWords(content);
+					feeling = int.Parse(words[1]);
+					if (feeling <= 5)
+					{
+						clockWorkUtility.sendMessage(from, "What does Charles Dickens keep in his spice rack? The best of thymes, the worst of thymes.");
+					}
+					else
+					{
+						clockWorkUtility.sendMessage(from, "Know any good jokes?");
+					}
 					break;
 			}
 
@@ -46,8 +55,8 @@ namespace OutReach.API.Controllers
 
 		private string getKeyword(string message)
 		{
-			var parseWords = message.Split(" ");
-			
+			var parseWords = getWords(message);
+
 			if(parseWords.Length > 0)
 			{
 				return parseWords[0].ToUpper();
@@ -55,6 +64,11 @@ namespace OutReach.API.Controllers
 			{
 				return "";
 			}
+		}
+
+		private string[] getWords(string message)
+		{
+			return message.Split(" ");
 		}
     }
 }
