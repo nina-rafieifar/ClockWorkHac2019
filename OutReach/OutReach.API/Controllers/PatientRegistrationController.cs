@@ -14,7 +14,7 @@ namespace OutReach.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RegisterPatientController : ControllerBase
+    public class PatientRegistrationController : ControllerBase
     {
 		[HttpPost]
 		public IActionResult registerPatient()
@@ -35,18 +35,35 @@ namespace OutReach.API.Controllers
 			return Ok(true);
 		}
 
-		//[HttpGet("{phoneNumber}"]
-		//public JsonResult getPatient(string phoneNumber)
-		//{
-		//	var registration = new RegistrationModel
-		//	{
-		//		Forename = "Conrad",
-		//		Surname = "Hodge",
-		//		MobileNumber = "44346346346",
-		//		DateOfBirth = "2019-10-01",
+		[HttpGet]
+		public IActionResult getPatient(string mobilePhoneNumber)
+		{
+			var registration = new RegistrationModel
+			{
+				Forename = "Conrad",
+				Surname = "Hodge",
+				MobileNumber = "44346346346",
+				DateOfBirth = "2019-10-01",
+				SupportPersonName = "Bob",
+				SupportPersonRelationship = "Relative",
+				SupportPersonMobileNumber = "441257233456",
+				MedicationName = "Paracetamol",
+				MedicationFrequency = "Daily",
+				MedicationForm = "Tablet",
+				MedicationDosage = "500mg",
+				MedicationNotes = "Take when required"
+			};
 
-		//	}
+			var registrationJson = JsonConvert.SerializeObject(registration);
 
-		//}
-    }
+			if(mobilePhoneNumber == registration.MobileNumber)
+			{
+				return Ok(registrationJson);
+			} else
+			{
+				return NotFound();
+			}
+			
+		}
+	}
 }
