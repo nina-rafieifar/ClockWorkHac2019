@@ -8,10 +8,23 @@ class Reminder
     {
 		try
         {
-            var patient = Patient.Get(args[0]);
+            var type = args[0];
+            var mobileNumber = args[1];
+
+            var patient = Patient.Get(mobileNumber);
+
+            string message = "";
+			switch(type.ToLower())
+			{
+				case "mood":
+                    message = "How are you doing today " + patient.Forename + "? On a scale of 1-10, how are you feeling? Reply with FEELING X, where X is 1-10";
+					break;
+				case "meds":
+                    message = "Hi " + patient.Forename + ", here is your reminder to take " + patient.MedicationDosage + " x " + patient.MedicationName;
+					break;
+            }
 
             var cw = new ClockWorkUtiliity();
-            var message = "Hello World";
             cw.sendMessage(patient.MobileNumber, message);
         }
         catch (Exception ex)

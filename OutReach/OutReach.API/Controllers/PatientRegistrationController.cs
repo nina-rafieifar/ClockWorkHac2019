@@ -27,8 +27,8 @@ namespace OutReach.API.Controllers
 				if (registrationDetails != null)
 				{
 
-					//var clockWorkUtility = new ClockWorkUtiliity();
-					//clockWorkUtility.sendMessage(contactDetails.PhoneNumber, "You have received this message to confirm your phone number. Please text OPTIN or OPTOUT?");
+					var clockWorkUtility = new ClockWorkUtiliity();
+					var resultMessage = clockWorkUtility.sendMessage(registrationDetails.MobileNumber, "You have agreed an OutReach care plan. To confirm you consent, please reply to this message with either CONSENT Yes or CONSENT No.");
 				}
 			}
 
@@ -42,7 +42,7 @@ namespace OutReach.API.Controllers
 			{
 				Forename = "Conrad",
 				Surname = "Hodge",
-				MobileNumber = "44346346346",
+				MobileNumber = "447971670708",
 				DateOfBirth = "2019-10-01",
 				SupportPersonName = "Bob",
 				SupportPersonRelationship = "Relative",

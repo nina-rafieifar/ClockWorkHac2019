@@ -17,6 +17,8 @@ namespace OutReach.API.Controllers
 		[HttpPost]
 		public IActionResult validate()
 		{
+			var clockworkMessage = "";
+
 			using (var reader = new StreamReader(Request.Body))
 			{
 				var json = reader.ReadToEnd();
@@ -25,10 +27,10 @@ namespace OutReach.API.Controllers
 				if (contactDetails != null)
 				{
 					var clockWorkUtility = new ClockWorkUtiliity();
-					clockWorkUtility.sendMessage(contactDetails.PhoneNumber, "You have received this message to confirm your phone number. Please text OPTIN or OPTOUT?");
+					clockworkMessage = clockWorkUtility.sendMessage(contactDetails.PhoneNumber, "You have received this message to confirm your phone number. Please text OPTIN or OPTOUT?");
 				}
 			}
-			return Ok(true);
+			return Ok(clockworkMessage);
 		}
 	}
 }
