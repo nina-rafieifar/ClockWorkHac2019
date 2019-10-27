@@ -84,13 +84,24 @@ export class Verification extends React.Component<IVerificationProps, IVerificat
                 Submit
               </Button>
             </div>
+            <div id="message"></div>
           </div>
         </>
       );
     } else {
       return (
         <>
-          <Registration></Registration>
+          <Registration
+            dateOfBirth={this.state.dateOfBirth}
+            supportPersonName={this.state.supportPersonName}
+            supportPersonMobileNumber={this.state.supportPersonMobileNumber}
+            supportPersonRelationship={this.state.supportPersonRelationship}
+            medicationName={this.state.medicationName}
+            medicationFrequency={this.state.medicationFrequency}
+            medicationForm={this.state.medicationForm}
+            medicationDosage={this.state.medicationDosage}
+            medicationNotes={this.state.medicationNotes}
+          ></Registration>
         </>
       );
     }
@@ -117,38 +128,59 @@ export class Verification extends React.Component<IVerificationProps, IVerificat
   protected verify() {
     if (this.state.forename !== "" && this.state.surname !== "" && this.state.mobileNumber !== "") {
       this.checkIfIsVerified();
-      if (!this.state.isVerified)
-        fetch(this.url + "/api/VerifyPhoneNumber", {
-          method: "POST",
-          body: JSON.stringify({
-            patientForename: this.state.forename,
-            patientSurname: this.state.surname,
-            phoneNumber: this.state.mobileNumber
-          })
-        })
-          .then(response => {
-            return response.text();
-          })
-          .then(result => {
-            let response = JSON.parse(result);
-            // this.setState({
-            //   items: response.audit as []
-            // });
-          });
     }
   }
 
   protected checkIfIsVerified() {
     if (this.state.mobileNumber !== "")
-      fetch(this.url + "/api/Patient?mobilePhoneNumber=" + this.state.mobileNumber)
+      fetch(this.url + "PatientRegistration?mobilePhoneNumber=" + this.state.mobileNumber)
         .then(response => {
-          return response.text();
+          if (response.status != 200) {
+            fetch(this.url + "VerifyPhoneNumber", {
+              method: "POST",
+              body: JSON.stringify({
+                patientForename: this.state.forename,
+                patientSurname: this.state.surname,
+                phoneNumber: this.state.mobileNumber
+              })
+            })
+              .then(response => {
+                return response.text();
+              })
+              .then(result => {
+                const message = document.getElementById("message");
+                if (message) {
+                  message.innerHTML =
+                    "<p>A text message has been sent to " +
+                    this.state.mobileNumber +
+                    ". Please verify your mobile number by responding `OPTIN`. </p>";
+                  message.style.display = "block";
+                }
+              });
+            return JSON.parse("{}");
+          } else return response.text();
         })
         .then(result => {
-          let response = JSON.parse(result);
-          // this.setState({
-          //   items: response.audit as []
-          // });
+          try {
+            let response = JSON.parse(result);
+            this.setState({
+              forename: response.forename,
+              surname: response.surname,
+              mobileNumber: response.mobileNumber,
+              dateOfBirth: response.dateOfBirth,
+              supportPersonName: response.supportPersonName,
+              supportPersonMobileNumber: response.supportPersonMobileNumber,
+              supportPersonRelationship: response.supportPersonRelationship,
+              medicationName: response.medicationName,
+              medicationFrequency: response.medicationFrequency,
+              medicationDosage: response.medicationDosage,
+              medicationForm: response.medicationForm,
+              medicationNotes: response.medicationNotes,
+              isVerified: true
+            });
+          } catch {
+            this.setState({ isVerified: false });
+          }
         });
   }
 }

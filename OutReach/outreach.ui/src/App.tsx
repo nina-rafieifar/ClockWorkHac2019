@@ -15,7 +15,7 @@ class App extends React.Component<any> {
           <header>{/* <div className="App-logo"></div> */}</header>
           <Container>
             <div>
-              <h1 className="formTitle">Welcome to ReachOut</h1>
+              <h1 className="formTitle">Welcome to OutReach</h1>
             </div>
             <Verification forename="" surname="" mobileNumber=""></Verification>
           </Container>
