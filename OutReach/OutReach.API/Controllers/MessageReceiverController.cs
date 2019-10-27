@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -77,6 +78,20 @@ namespace OutReach.API.Controllers
 		private string GetCatVideoUrl()
 		{
 			string api_key = "704060f2-e049-417f-b282-5f9f97bbab2a";
+
+			WebRequest request = WebRequest.Create("https://thecatapi.com/v1/images");
+			WebResponse response = request.GetResponse();
+
+			// Get the stream containing content returned by the server.
+			// The using block ensures the stream is automatically closed.
+			//using (Stream dataStream = response.GetResponseStream())
+			//{
+			//	// Open the stream using a StreamReader for easy access.
+			//	StreamReader reader = new StreamReader(dataStream);
+			//	// Read the content.
+			//	string responseFromServer = reader.ReadToEnd();
+			//	registrationDetails = JsonConvert.DeserializeObject<RegistrationModel>(responseFromServer);
+			//}
 
 			return "";
 		}
