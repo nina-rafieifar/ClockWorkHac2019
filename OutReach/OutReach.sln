@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutReach.API", "OutReach.API\OutReach.API.csproj", "{B46C7E91-A0AE-4932-BC39-075E4AF88E16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutReach.Library", "OutReach.Library\OutReach.Library.csproj", "{5C1850F3-D98E-4CA7-AAA4-31D24FAD0278}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutReach.Library", "OutReach.Library\OutReach.Library.csproj", "{5C1850F3-D98E-4CA7-AAA4-31D24FAD0278}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
