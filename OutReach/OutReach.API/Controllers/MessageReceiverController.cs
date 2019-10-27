@@ -73,5 +73,10 @@ namespace OutReach.API.Controllers
 		{
 			return message.Split(" ");
 		}
+
+		private string GetCatVideoUrl()
+		{
+			return "";
+		}
     }
 }
