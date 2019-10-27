@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 using OutReach.API.Tools;
 using OutReach.Libary.Models;
 
-namespace OutReach.API.Controllers
-{
+namespace OutReach.API.Controllers {
 	[Route("api/[controller]")]
 	[ApiController]
 	public class VerifyPhoneNumberController : ControllerBase {
@@ -15,19 +14,17 @@ namespace OutReach.API.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpPost]
-		public IActionResult validate()
-		{
+		public IActionResult validate() {
 			var clockworkMessage = "";
 
-			using (var reader = new StreamReader(Request.Body))
-			{
+			using(var reader = new StreamReader(Request.Body)) {
 				var json = reader.ReadToEnd();
 				var contactDetails = JsonConvert.DeserializeObject<VerifyContactNumberModel>(json);
 
-				if (contactDetails != null)
-				{
+				if (contactDetails != null) {
 					var clockWorkUtility = new ClockWorkUtiliity();
 					clockworkMessage = clockWorkUtility.sendMessage(contactDetails.PhoneNumber, "You have received this message to confirm your phone number. Please text MOBILE OK or MOBILE WRONG?");
+					PatientFileUtility utility = new PatientFileUtility(contactDetails.PhoneNumber, contactDetails.Forename, contactDetails.Surname, false);
 				}
 			}
 			return Ok(clockworkMessage);
