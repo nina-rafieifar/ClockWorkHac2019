@@ -15,14 +15,17 @@ namespace OutReach.API.Controllers
 		public IActionResult receiveMessage(string id, string to, string from, string keyword, string content)
 		{
 			var message = "";
+			var cw = new ClockWorkUtiliity();
 
 			switch(keyword.ToLower())
 			{
 				case "optin":
 					message = "Welcome - you have made the right choice!";
+					cw.sendMessage(from, message);
 					break;
 				case "optout":
 					message = "You have opted out! GOOD BYE!";
+					cw.sendMessage(from, message);
 					break;
 			}
 

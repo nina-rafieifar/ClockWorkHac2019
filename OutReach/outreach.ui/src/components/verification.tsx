@@ -35,8 +35,8 @@ export class Verification extends React.Component<IVerificationProps> {
   }
 
   protected verify() {
-    fetch("https://356282fd.ngrok.io/clockwork/api/VerifyPhoneNumber", {
-      method: "POST",
+    let url = process.env.REACT_APP_API_URL as string;
+    fetch(url + "/api/VerifyPhoneNumber", {
       body: JSON.stringify({
         patientForename: this.props.patientForename,
         patientSurname: this.props.patientSurname,
