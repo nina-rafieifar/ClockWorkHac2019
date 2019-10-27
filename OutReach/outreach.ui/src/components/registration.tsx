@@ -1,7 +1,17 @@
 import React from "react";
 import { Col, Label, Input, Button, Form, FormGroup } from "reactstrap";
 
-interface IRegistrationProps {}
+interface IRegistrationProps {
+  dateOfBirth: string;
+  supportPersonName: string;
+  supportPersonMobileNumber: string;
+  supportPersonRelationship: string;
+  medicationName: string;
+  medicationFrequency: string;
+  medicationForm: string;
+  medicationDosage: string;
+  medicationNotes: string;
+}
 interface IRegistrationState {
   dateOfBirth: string;
   supportPersonName: string;
@@ -18,15 +28,15 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
   constructor(props: IRegistrationProps, context?: IRegistrationState) {
     super(props, context);
     this.state = {
-      dateOfBirth: "",
-      supportPersonName: "",
-      supportPersonMobileNumber: "",
-      supportPersonRelationship: "Friend",
-      medicationName: "",
-      medicationFrequency: "Hourly",
-      medicationForm: "",
-      medicationDosage: "",
-      medicationNotes: ""
+      dateOfBirth: this.props.dateOfBirth,
+      supportPersonName: this.props.supportPersonName,
+      supportPersonMobileNumber: this.props.supportPersonMobileNumber,
+      supportPersonRelationship: this.props.supportPersonRelationship,
+      medicationName: this.props.medicationName,
+      medicationFrequency: this.props.medicationFrequency,
+      medicationForm: this.props.medicationForm,
+      medicationDosage: this.props.medicationDosage,
+      medicationNotes: this.props.medicationNotes
     };
     this.handleDateOfBirthChange = this.handleDateOfBirthChange.bind(this);
     this.handleSupportPersonNameChange = this.handleSupportPersonNameChange.bind(this);
@@ -36,6 +46,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
     this.handleMedicationFrequencyChange = this.handleMedicationFrequencyChange.bind(this);
     this.handleMedicationFormChange = this.handleMedicationFormChange.bind(this);
     this.handleMedicationDosageChange = this.handleMedicationDosageChange.bind(this);
+    this.handleMedicationNotesChange = this.handleMedicationNotesChange.bind(this);
     this.register = this.register.bind(this);
   }
 
@@ -59,7 +70,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
 
   protected handleSupportPersonRelationshipChange({ target }: any) {
     this.setState({
-      supportPersonRelationship: target.value
+      supportPersonRelationship: target.name
     });
   }
 
@@ -71,13 +82,13 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
 
   protected handleMedicationFrequencyChange({ target }: any) {
     this.setState({
-      medicationFrequency: target.value
+      medicationFrequency: target.name
     });
   }
 
   protected handleMedicationFormChange({ target }: any) {
     this.setState({
-      medicationForm: target.value
+      medicationForm: target.name
     });
   }
 
@@ -95,7 +106,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
 
   protected register() {
     let url = process.env.REACT_APP_API_URL as string;
-    fetch(url + "/api/register", {
+    fetch(url + "PatientRegistration", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -114,13 +125,23 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
         <Col>
           <FormGroup controlId="formDateOfBirth">
             <Label>Date of birth</Label>
-            <Input type="date" placeholder="Enter date of birth" onChange={this.handleDateOfBirthChange} />
+            <Input
+              type="date"
+              placeholder="Enter date of birth"
+              onChange={this.handleDateOfBirthChange}
+              value={this.state.dateOfBirth}
+            />
           </FormGroup>
         </Col>
         <Col>
           <FormGroup controlId="formSupportPersonName">
             <Label>Support person name</Label>
-            <Input type="text" placeholder="Enter support person name" onChange={this.handleSupportPersonNameChange} />
+            <Input
+              type="text"
+              placeholder="Enter support person name"
+              onChange={this.handleSupportPersonNameChange}
+              value={this.state.supportPersonName}
+            />
           </FormGroup>
         </Col>
         <Col>
@@ -130,58 +151,107 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
               type="text"
               placeholder="Enter support person mobile number"
               onChange={this.handleSupportPersonMobileNumberChange}
+              value={this.state.supportPersonMobileNumber}
             />
           </FormGroup>
         </Col>
         <Col>
-          <FormGroup controlId="formSupportPersonRelationship">
+          <FormGroup tag="fieldset" controlId="formSupportPersonRelationship">
             <Label>Support person relationship</Label>
-            <Input as="select" onChange={this.handleSupportPersonRelationshipChange}>
-              <option>Friend</option>
-              <option>Relative</option>
-            </Input>
+            <FormGroup check onChange={this.handleSupportPersonRelationshipChange}>
+              <Label check>
+                <Input type="radio" name="Friend" checked={this.state.supportPersonRelationship === "Friend"} /> Friend
+              </Label>
+            </FormGroup>
+            <FormGroup check onChange={this.handleSupportPersonRelationshipChange}>
+              <Label check>
+                <Input type="radio" name="Relative" checked={this.state.supportPersonRelationship === "Relative"} />{" "}
+                Relative
+              </Label>
+            </FormGroup>
           </FormGroup>
         </Col>
         <Col>
           <FormGroup controlId="formMedicationName">
             <Label>Medication name</Label>
-            <Input type="text" placeholder="Enter medication name" onChange={this.handleMedicationNameChange} />
+            <Input
+              type="text"
+              placeholder="Enter medication name"
+              onChange={this.handleMedicationNameChange}
+              value={this.state.medicationName}
+            />
           </FormGroup>
         </Col>
         <Col>
-          <FormGroup controlId="formMedicationFrequency">
+          <FormGroup tag="fieldset" controlId="formMedicationFrequency">
             <Label>Medication frequency</Label>
-            <Input as="select" onChange={this.handleMedicationFrequencyChange}>
-              <option>Hourly</option>
-              <option>Daily</option>
-              <option>Weekly</option>
-              <option>Monthly</option>
-            </Input>
+            <FormGroup check onChange={this.handleMedicationFrequencyChange}>
+              <Label check>
+                <Input type="radio" name="Hourly" checked={this.state.medicationFrequency === "Hourly"} /> Hourly
+              </Label>
+            </FormGroup>
+            <FormGroup check onChange={this.handleMedicationFrequencyChange}>
+              <Label check>
+                <Input type="radio" name="Daily" checked={this.state.medicationFrequency === "Daily"} /> Daily
+              </Label>
+            </FormGroup>
+            <FormGroup check onChange={this.handleMedicationFrequencyChange}>
+              <Label check>
+                <Input type="radio" name="Weekly" checked={this.state.medicationFrequency === "Weekly"} /> Weekly
+              </Label>
+            </FormGroup>
+            <FormGroup check onChange={this.handleMedicationFrequencyChange}>
+              <Label check>
+                <Input type="radio" name="Monthly" checked={this.state.medicationFrequency === "Monthly"} /> Monthly
+              </Label>
+            </FormGroup>
           </FormGroup>
         </Col>
         <Col>
-          <FormGroup controlId="formMedicationForm">
+          <FormGroup tag="fieldset" controlId="formMedicationForm">
             <Label>Medication form</Label>
-            <Input as="select" onChange={this.handleMedicationFormChange}>
-              <option>Tablet</option>
-              <option>Liquid</option>
-              <option>Injection</option>
-            </Input>
+            <FormGroup check onChange={this.handleMedicationFormChange}>
+              <Label check>
+                <Input type="radio" name="Tablet" checked={this.state.medicationForm === "Tablet"} /> Tablet
+              </Label>
+            </FormGroup>
+            <FormGroup check onChange={this.handleMedicationFormChange}>
+              <Label check>
+                <Input type="radio" name="Liquid" checked={this.state.medicationForm === "Liquid"} /> Liquid
+              </Label>
+            </FormGroup>
+            <FormGroup check onChange={this.handleMedicationFormChange}>
+              <Label check>
+                <Input type="radio" name="Injection" checked={this.state.medicationForm === "Injection"} /> Injection
+              </Label>
+            </FormGroup>
           </FormGroup>
         </Col>
         <Col>
           <FormGroup controlId="formMedicationDosage">
             <Label>Medication dosage</Label>
-            <Input type="text" placeholder="Enter medication dosage" onChange={this.handleMedicationDosageChange} />
+            <Input
+              type="text"
+              placeholder="Enter medication dosage"
+              onChange={this.handleMedicationDosageChange}
+              value={this.state.medicationDosage}
+            />
           </FormGroup>
         </Col>
         <Col>
           <FormGroup controlId="formMedicationNotes">
             <Label>Medication notes</Label>
-            <Input type="textarea" placeholder="Enter medication notes" onChange={this.handleMedicationNotesChange} />
+            <Input
+              type="textarea"
+              placeholder="Enter medication notes"
+              onChange={this.handleMedicationNotesChange}
+              value={this.state.medicationNotes}
+            />
           </FormGroup>
         </Col>
-        <Button onClick={this.register}>Register</Button>
+        <div style={{ textAlign: "center" }}>
+          <Button onClick={this.register}>Register</Button>
+        </div>
       </div>
     );
   }
