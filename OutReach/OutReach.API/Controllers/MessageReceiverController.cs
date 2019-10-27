@@ -34,7 +34,6 @@ namespace OutReach.API.Controllers
 				case "CONSENT":
 					// todo: add interaction here
 					resultMessage = clockWorkUtility.sendMessage(from, $"Thank you your message of CONSENT has been received.");
-
 					break;
 				case "FEELING":
 					// todo: add interaction here
