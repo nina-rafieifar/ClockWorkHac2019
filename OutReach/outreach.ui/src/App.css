@@ -1,3 +1,8 @@
+body {
+  text-align: center;
+  background-color: lightgray;
+}
+
 .App {
   text-align: center;
   background-color: lightgray;
@@ -36,6 +41,8 @@
 .formRegistration {
   margin: 0;
   text-align: left;
+  height: 100%;
+  padding: 10px 10px 25px 10px;
 }
 
 label {
@@ -44,7 +51,6 @@ label {
 }
 
 .container {
-  /* margin-left: 1% !important; */
   width: 45% !important;
   padding-top: 1% !important;
   border-radius: 10px;
@@ -56,10 +62,57 @@ label {
 .formTitle {
   margin: -42px 17% 20px 17%;
   padding: 2% 5px;
-  /* background-color: rgba(243, 105, 105); */
   opacity: 0.95;
   color: white;
   border-radius: 5px;
   background-image: linear-gradient(120deg, rgba(243, 105, 105) 0%, #5ba39a 100%);
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+}
+
+.btn-secondary {
+  background-color: rgba(243, 105, 105) !important;
+  border-color: rgba(243, 105, 105) !important;
+}
+
+@media screen and (min-width: 576px) {
+  .container {
+    /* margin-left: 1% !important; */
+    width: 75% !important;
+  }
+}
+
+@media screen and (min-height: 276px) {
+  .Form {
+    height: 307px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .Form {
+    height: 568px;
+  }
+  .container {
+    /* margin-left: 1% !important; */
+    width: 65% !important;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .Form {
+    height: 698px;
+  }
+  .container {
+    /* margin-left: 1% !important; */
+    width: 60% !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .Form {
+    height: 898px;
+  }
+  .container {
+    /* margin-left: 1% !important; */
+    width: 45% !important;
+  }
 }
