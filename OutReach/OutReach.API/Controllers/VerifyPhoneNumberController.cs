@@ -23,7 +23,7 @@ namespace OutReach.API.Controllers {
 
 				if (contactDetails != null) {
 					var clockWorkUtility = new ClockWorkUtiliity();
-					clockworkMessage = clockWorkUtility.sendMessage(contactDetails.PhoneNumber, "You have received this message to confirm your phone number. Please text OPTIN or OPTOUT?");
+					clockworkMessage = clockWorkUtility.sendMessage(contactDetails.PhoneNumber, "You have received this message to confirm your phone number. Please text MOBILE OK or MOBILE WRONG?");
 					PatientFileUtility utility = new PatientFileUtility(contactDetails.PhoneNumber, contactDetails.Forename, contactDetails.Surname, false);
 				}
 			}
