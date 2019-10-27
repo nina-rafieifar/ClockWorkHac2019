@@ -92,6 +92,9 @@ export class Verification extends React.Component<IVerificationProps, IVerificat
       return (
         <>
           <Registration
+            forename={this.state.forename}
+            surname={this.state.surname}
+            mobileNumber={this.state.mobileNumber}
             dateOfBirth={this.state.dateOfBirth}
             supportPersonName={this.state.supportPersonName}
             supportPersonMobileNumber={this.state.supportPersonMobileNumber}
@@ -162,6 +165,7 @@ export class Verification extends React.Component<IVerificationProps, IVerificat
           } else return response.text();
         })
         .then(result => {
+          console.log(result);
           try {
             let response = JSON.parse(result);
             if (!response.mobileVerified) {

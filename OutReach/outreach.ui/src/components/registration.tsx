@@ -2,6 +2,9 @@ import React from "react";
 import { Col, Label, Input, Button, Form, FormGroup } from "reactstrap";
 
 interface IRegistrationProps {
+  forename: string;
+  surname: string;
+  mobileNumber: string;
   dateOfBirth: string;
   supportPersonName: string;
   supportPersonMobileNumber: string;
@@ -13,6 +16,9 @@ interface IRegistrationProps {
   medicationNotes: string;
 }
 interface IRegistrationState {
+  forename: string;
+  surname: string;
+  mobileNumber: string;
   dateOfBirth: string;
   supportPersonName: string;
   supportPersonMobileNumber: string;
@@ -28,6 +34,9 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
   constructor(props: IRegistrationProps, context?: IRegistrationState) {
     super(props, context);
     this.state = {
+      forename: this.props.forename,
+      surname: this.props.surname,
+      mobileNumber: this.props.mobileNumber,
       dateOfBirth: this.props.dateOfBirth,
       supportPersonName: this.props.supportPersonName,
       supportPersonMobileNumber: this.props.supportPersonMobileNumber,
@@ -105,6 +114,7 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
   }
 
   protected register() {
+    console.log(JSON.stringify(this.state));
     let url = process.env.REACT_APP_API_URL as string;
     fetch(url + "PatientRegistration", {
       method: "POST",
