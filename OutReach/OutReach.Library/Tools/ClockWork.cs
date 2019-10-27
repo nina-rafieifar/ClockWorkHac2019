@@ -6,10 +6,11 @@ namespace OutReach.API.Tools
 {
 	public class ClockWorkUtiliity
 	{
-		public void sendMessage(string phoneNumber, string message)
+		public string sendMessage(string phoneNumber, string message)
 		{
 			var key = "68c08ff8190e755bf4cc76e08f1ab7f71bf275b4";
 			var fromPhoneNumber = "447860033387";
+
 			try
 			{
 				Clockwork.API api = new Clockwork.API(key);
